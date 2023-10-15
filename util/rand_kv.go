@@ -19,10 +19,10 @@ func GetTestKey(i int) []byte {
 
 func RandomValue(n int) []byte {
 	b := make([]byte, n)
+	lock.Lock()
 	for i := range b {
-		lock.Lock()
 		b[i] = letters[randStr.Intn(len(letters))]
-		lock.Unlock()
 	}
+	lock.Unlock()
 	return []byte("lotusdb-test-value-" + string(b))
 }
